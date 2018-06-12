@@ -19,7 +19,7 @@ class Adaline(object):
             print('net_input: ', net_input)
             errors = (y-net_input)
             print('errors; ', errors)
-            self.w_[1:] += self.eta * (X*errors).sum()
+            self.w_[1:] += self.eta * X.T.dot(errors)
             print('X.T: ', X.T)
             self.w_[0] += self.eta * errors.sum()
             cost = (errors**2).sum() / 2
