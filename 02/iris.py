@@ -5,11 +5,11 @@ from adaline import *
 
 # Import data and change setosa to -1 & vice-versa
 df = pd.read_csv('../Resources/iris.data', header=None)
-y = df.iloc[:100, 4].values
+y = df.iloc[:5, 4].values
 y = np.where(y == "Iris-setosa", -1, 1)
 
 # Extract sepal length[0] and petal length[2]
-X = df.iloc[:100, [0, 2]].values
+X = df.iloc[:5, [0, 2]].values
 # plot
 # plt.scatter(X[:50, 0], X[:50, 1], color='red', marker='o', label='setosa')
 # plt.scatter(X[50:100, 0], X[50:100, 1], color='blue', marker='x', label='versicolor')
@@ -26,3 +26,11 @@ plt.ylabel('Number of updates')
 plt.show()
 # print(ada.w_)
 # print('sample set: ', X.shape[1])
+
+# a = np.arange(10).reshape(5, 2)
+# b = np.arange(5)
+# print(a)
+# print(b)
+# print(a.T.dot(b))
+# print(a[:, 1].T.dot(b))
+# print(a[:, 0].T.dot(b))
