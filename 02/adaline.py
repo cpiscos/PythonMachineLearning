@@ -15,30 +15,17 @@ class Adaline(object):
 
         for _ in range(self.n_iter):
             net_input = self.net_input(X)
-            print('y: ', y)
-            print('net_input: ', net_input)
             errors = (y-net_input)
-            print('errors; ', errors)
-            print('weights: ', self.w_[1:])
-            print('delta', self.eta * (X.T.dot(errors)))
-            self.w_[1:] += self.eta * (X.T.dot(errors))
-            print('X: ', X)
-            print('X shape: ', X.shape)
-            print('X.T: ', X.T)
-            print('X.T.dot(errors)', X.T.dot(errors))
-            self.w_[0] += self.eta * errors.sum()
-            cost = (errors**2).sum() / 2
+            self.w_[1:] += self.eta * (X.T.dot(errors) / X.shape[1])
+            self.w_[0] += self.eta * errors.sum() / X.shape[1]
+            cost = (errors**2).sum() / (2*X.shape[1])
             self.cost_.append(cost)
         return self
 
     def predict(self, X):
         a = np.where(self.net_input(X) >= 0, 1, -1)
-        print('prediction', a)
         return a
 
     def net_input(self, X):
         b = np.dot(X, self.w_[1:]) + self.w_[0]
-        # print('sample:', X)
-        print('dot: ', np.dot(X, self.w_[1:]))
-        print('b: ', b)
         return b
